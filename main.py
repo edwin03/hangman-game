@@ -10,18 +10,26 @@ for char in chosen_word:
     placeholder += "_"
 
 print(f"Place holder: {placeholder}")
+display = placeholder
+game_over = False
 
 # TODO-2 - Ask the user to guess a letter and assign their answer to a variable called guess. Make guess lowercase.
-guess = input("Guess a letter: ").lower()
+while not game_over:
+    guess = input("Guess a letter: ").lower()
 
-# TODO-3 - Check if the letter the user guessed (guess) is one of the letters in the chosen_word. Print "Right" if it
-#  is, "Wrong" if it's not.
-display = ""
-
-for letter in chosen_word:
-    if letter == guess:
-        display += guess
+    if guess in display:
+        print(f"This has already been gussed: {guess}")
     else:
-        display += "_"
+        counter = 0
+        for letter in chosen_word:
+            if letter == guess:
+                display = display[:counter] + guess + display[counter+1:]
+                counter += 1
+            else:
+                print("Do nothing!")
+                counter += 1
+    if display == chosen_word:
+         print("You won!")
+         game_over = True
 
-print(f"Display String: {display}")
+    print(f"Display String: {display}")
